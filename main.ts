@@ -8,7 +8,7 @@
 basic.clearScreen()
 basic.showIcon(IconNames.Happy)
 let neopixelStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
-let distance = sonar.ping(DigitalPin.P1, DigitalPin.P1, PingUnit.MicroSeconds)
+let distance: number = 0
 neopixelStrip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
 neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
 neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
@@ -18,7 +18,11 @@ neopixelStrip.show()
 
 // when distance < 10 turns all neopixels red
 input.onButtonPressed(Button.A, function() {
-    sonar.ping(DigitalPin.P1, DigitalPin.P1, PingUnit.MicroSeconds)
+    distance = sonar.ping(
+        DigitalPin.P1,
+        DigitalPin.P2,
+        PingUnit.Centimeters
+    )
     if (distance > 10) {
     neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Black))
     neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Black))
